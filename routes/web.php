@@ -18,11 +18,30 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'admin'], function(){
-  Route::get('news/create', 'Admin\NewsController@add');
+  Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
   Route::get('XXX', 'AAAController@bbb');
-  Route::get('profile/create', 'Admin\ProfileController@add');
-  Route::get('profile/edit', 'Admin\ProfileController@edit');
+  Route::get('profile/create', 'Admin\ProfileController@add')->middleware('auth');
+  Route::get('profile/edit', 'Admin\ProfileController@edit')->middleware('auth');
+});
+
+Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
+  Route::get('news/create', 'Admin\NewsController@add');
+  Route::post('news/create', 'Admin\NewsController@create');
+});
+
+Route::group(['prefix' => 'admin'], function() {
+   Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
 });
 
 
+Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
