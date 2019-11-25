@@ -24,14 +24,18 @@ Route::group(['prefix' => 'admin'], function(){
   Route::get('profile/edit', 'Admin\ProfileController@edit')->middleware('auth');
 });
 
+
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
   Route::get('news/create', 'Admin\NewsController@add');
   Route::post('news/create', 'Admin\NewsController@create');
+  Route::post('profile/create', 'Admin\ProfileController@create'); //Laravel13-課題3
+  Route::post('profile/create', 'Admin\ProfileController@create'); //Laravel13-課題4
+  Route::post('profile/edit','Admin\ProfileController@update);　//Laravel13-課題6
 });
 
-Route::group(['prefix' => 'admin'], function() {
-   Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
-});
+
+
+
 
 
 Auth::routes();
