@@ -17,36 +17,18 @@ Route::get('/', function () {
 
 
 
-Route::group(['prefix' => 'admin'], function(){
-  Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
-  Route::get('XXX', 'AAAController@bbb');
-  Route::get('profile/create', 'Admin\ProfileController@add')->middleware('auth');
-  Route::get('profile/edit', 'Admin\ProfileController@edit')->middleware('auth');
-});
-
-
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
+  Route::get('news', 'Admin\NewsController@index');
   Route::get('news/create', 'Admin\NewsController@add');
   Route::post('news/create', 'Admin\NewsController@create');
-  Route::post('profile/create', 'Admin\ProfileController@create'); //Laravel13-課題3
-  Route::post('profile/create', 'Admin\ProfileController@create'); //Laravel13-課題4
-  Route::post('profile/edit','Admin\ProfileController@update);　//Laravel13-課題6
+  Route::get('profile/create', 'Admin\ProfileController@add');
+  Route::get('profile/edit', 'Admin\ProfileController@edit');
+  Route::post('profile/create', 'Admin\ProfileController@create');//Laravel13-課題3
+  Route::post('profile/edit','Admin\ProfileController@update');
+  Route::get('news/edit', 'Admin\NewsController@edit');
+  Route::post('news/edit', 'Admin\NewsController@update');
 });
 
-
-
-
-
+Route::get('/home','HomeController@index')->name('home');
 
 Auth::routes();
-
-Route::get(/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-});
