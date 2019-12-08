@@ -27,8 +27,11 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
   Route::post('profile/edit','Admin\ProfileController@update');
   Route::get('news/edit', 'Admin\NewsController@edit');
   Route::post('news/edit', 'Admin\NewsController@update');
+  
 });
 
 Route::get('/home','HomeController@index')->name('home');
+Route::get('/', 'NewsController@index');
+Route::get('/', 'ProfileController@index');
 
 Auth::routes();
