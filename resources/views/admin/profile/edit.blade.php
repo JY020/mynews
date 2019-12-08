@@ -31,17 +31,30 @@
                     <div class="form-group row">
                         <label class="col-md-2" for="name">氏名</label>
                         <div class="col-md-5">
-                            <textarea class="form-control" name="name" rows="20">{{ $profile_form->name }}</textarea>
+                            <input type="text" class="form-control" name="name" value="{{ $profile_form->name }}">
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label class="col-md-2" for="gender">性別</label>
                         <div class="col-md-5">
-                            <textarea class="form-control" name="gender" rows="20">{{ $profile_form->gender }}</textarea>
-                        </div>
+                            <div class="radio-inline">
+                                <input type="radio" value ="男" name="gender" id="male" {{ $profile_form->gender=="男性"? "checked": ""}}>
+                                <label for ="male">男性</label>
+                            </div>
+                            <div class="radio-inline">
+                                <input type="radio" value ="女" name="gender" id="female" {{ $profile_form->gender=="女性"? "checked": ""}}>
+                                <label for ="female">女性</label>
+                            </div>
+                            
+                            <div class="radio-inline">
+                                <input type="radio" value ="その他" name="gender" id="other" {{ $profile_form->gender=="その他"? "checked": ""}}>
+                                <label for ="other">その他</label>
+                            </div>
+                            
+                        </div> 
                     </div>
-                    
+        
                     <div class="form-group row">
                         <label class="col-md-2" for="hobby">趣味</label>
                         <div class="col-md-8">

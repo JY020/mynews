@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-7 mx-auto">
                     <h2>My Profile</h2>
-                    <form action="{{ action('Auth\NewsController@update') }}" method="post" enctype="multipart/form-date">
+                    <form action="{{ action('Admin\ProfileController@update') }}" method="post" enctype="multipart/form-date">
                         @if (count($errors)) >0)
                         <ul>
                             @foreach($errors->all() as $e)

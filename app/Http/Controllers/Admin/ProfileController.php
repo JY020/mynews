@@ -42,7 +42,7 @@ public function add()
       } else {
           $posts = Profile::all();
       }
-      return view('admin.news.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+      return view('profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
   }
 
   // 以下を追記
@@ -54,7 +54,7 @@ public function add()
       if (empty($profile)) {
         abort(404);    
       }
-      return view('admin.profile.edit', ['peofile_form' => $profile]);
+      return view('admin.profile.edit', ['profile_form' => $profile]);
   }
 
 

@@ -1,59 +1,70 @@
-@extends('layouts.front')
+@extends('layouts.profile')
+@section('title', 'プロフィール')
 
 @section('content')
     <div class="container">
-        <hr color="#c0c0c0">
-        @if (!is_null($headline))
-            <div class="row">
-                <div class="headline col-md-10 mx-auto">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="caption mx-auto">
-                                <div class="image">
-                                    @if ($headline->image_path)
-                                        <img src="{{ asset('storage/image/' . $headline->image_path) }}">
-                                    @endif
-                                </div>
-                                <div class="title p-2">
-                                    <h1>{{ str_limit($headline->title, 70) }}</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="body mx-auto">{{ str_limit($headline->body, 650) }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-        <hr color="#c0c0c0">
         <div class="row">
-            <div class="posts col-md-8 mx-auto mt-3">
-                @foreach($posts as $post)
-                    <div class="post">
-                        <div class="row">
-                            <div class="text col-md-6">
-                                <div class="date">
-                                    {{ $post->updated_at->format('Y年m月d日') }}
-                                </div>
-                                <div class="title">
-                                    {{ str_limit($post->title, 150) }}
-                                </div>
-                                <div class="body mt-3">
-                                    {{ str_limit($post->body, 1500) }}
-                                </div>
-                            </div>
-                            <div class="image col-md-6 text-right mt-4">
-                                @if ($post->image_path)
-                                    <img src="{{ asset('storage/image/' . $post->image_path) }}">
-                                @endif
-                            </div>
+            <div class="col-md-8 mx-auto">
+                <h2>プロフィール</h2>
+                <form action="{{ action('Admin\ProfileController@update') }}" method="post" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    @if (count($errors) > 0)
+                        <ul>
+                            @foreach($errors->all() as $e)
+                                <li>{{ $e }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    <div class="form-group row">
+                        <label class="col-md-2" for="name">氏名</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="name" value="{{ $posts->name }}">
                         </div>
                     </div>
-                    <hr color="#c0c0c0">
-                @endforeach
+                    
+                    <div class="form-group row">
+                        <label class="col-md-2" for="gender">性別</label>
+                        <div class="col-md-5">
+                            <div class="radio-inline">
+                                <input type="radio" value ="男" name="gender" id="male" {{ $posts->gender=="男性"? "checked": ""}}>
+                                <label for ="male">男性</label>
+                            </div>
+                            <div class="radio-inline">
+                                <input type="radio" value ="女" name="gender" id="female" {{ $posts->gender=="女性"? "checked": ""}}>
+                                <label for ="female">女性</label>
+                            </div>
+                            
+                            <div class="radio-inline">
+                                <input type="radio" value ="その他" name="gender" id="other" {{ $posts->gender=="その他"? "checked": ""}}>
+                                <label for ="other">その他</label>
+                            </div>
+                            
+                        </div> 
+                    </div>
+        
+                    <div class="form-group row">
+                        <label class="col-md-2" for="hobby">趣味</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" name="hobby" rows="20">{{ $posts->hobby }}</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-2" for="introduction">自己紹介欄</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="introduction" rows="20">{{ $posts->introduction }}</textarea>
+                        </div>
+                    </div>
+                                   
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <input type="hidden" name="id" value="{{ $posts->id }}">
+                            {{ csrf_field() }}
+                            <input type="submit" class="btn btn-primary" value="更新">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
     </div>
 @endsection
