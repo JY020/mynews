@@ -40,9 +40,9 @@ public function add()
       if ($cond_title != '') {
           $posts = Profile::where('title', $cond_title)->get();
       } else {
-          $posts = Profile::all();
+          $posts = Profile::foreach();
       }
-      return view('profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+      return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
   }
 
   // 以下を追記
@@ -54,7 +54,7 @@ public function add()
       if (empty($profile)) {
         abort(404);    
       }
-      return view('admin.profile.edit', ['profile_form' => $profile]);
+      return view('admin.profile.edit', ['pofile_form' => $profile]);
   }
 
 
