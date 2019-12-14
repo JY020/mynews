@@ -8,19 +8,6 @@
               <h2>プロフィール</h2>
               @foreach($profile_form as $profile)
                     <div class="form-group row">
-                        <label class="col-md-2" for="title">タイトル</label>
-                        <div class="col-md-10">
-                            {{ $profile->title }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2" for="body">本文</label>
-                        <div class="col-md-10">
-                            {{ $profile->body }}
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
                         <label class="col-md-2" for="name">氏名</label>
                         <div class="col-md-5">
                             {{ $profile->name }}
